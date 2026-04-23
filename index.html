@@ -3,97 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEBFLOW | Premium Digital Agency</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <title>WEBFLOW | 3D Interactive Agency</title>
     <style>
         :root {
             --bg: #030303;
-            --accent: #6366f1;
-            --glass: rgba(255, 255, 255, 0.03);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --accent: #ffffff;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--bg); color: #fff; overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* Arxa fon hərəkətli blob */
-        .gradient-blob {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at 70% 30%, #6366f1, transparent 40%),
-                        radial-gradient(circle at 20% 80%, #06b6d4, transparent 40%);
-            filter: blur(120px); opacity: 0.15; z-index: -1;
-            animation: blob-move 20s infinite alternate;
+        .wrapper { perspective: 1000px; padding: 100px 5%; }
+
+        /* Hero Section */
+        .hero { text-align: center; margin-bottom: 150px; }
+        .hero h1 { font-size: clamp(4rem, 12vw, 10rem); font-weight: 800; text-transform: uppercase; letter-spacing: -5px; line-height: 0.9; }
+
+        /* 3D Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; transform-style: preserve-3d; }
+
+        /* 3D Card */
+        .card {
+            background: var(--card-bg);
+            padding: 60px; border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            transition: transform 0.1s ease-out, box-shadow 0.3s;
+            cursor: pointer;
+            transform-style: preserve-3d;
         }
+        .card:hover { box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .card h2 { font-size: 2.5rem; margin-bottom: 20px; transform: translateZ(20px); }
+        .card p { color: #aaa; transform: translateZ(10px); }
 
-        @keyframes blob-move { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
-
-        /* Nav */
-        nav { padding: 40px 8%; display: flex; justify-content: space-between; align-items: center; }
-        .nav-links a { color: #fff; text-decoration: none; margin-left: 30px; font-weight: 400; opacity: 0.6; transition: 0.3s; }
-        .nav-links a:hover { opacity: 1; }
-
-        /* Hero */
-        .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; }
-        h1 { font-size: clamp(4rem, 15vw, 9rem); font-weight: 800; line-height: 0.9; letter-spacing: -5px; margin-bottom: 20px; }
-        .sub-hero { font-size: 1.5rem; color: #888; margin-bottom: 40px; }
-
-        /* Böyük Grid Sistemi */
-        .main-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; padding: 0 8%; }
-        .box { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 50px; border-radius: 40px; transition: 0.4s; }
-        .box:hover { background: rgba(255,255,255,0.06); transform: translateY(-10px); }
-        .span-6 { grid-column: span 6; }
-        .span-12 { grid-column: span 12; }
-
-        /* Footer */
-        footer { padding: 100px 8%; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 100px; }
-        .social { font-size: 2rem; margin-top: 20px; }
+        /* Contact Section */
+        .contact { text-align: center; margin-top: 200px; padding: 100px 0; border-top: 1px solid #222; }
+        .email { font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; color: #fff; text-decoration: none; }
+        
+        .mouse-cursor { position: fixed; width: 20px; height: 20px; border: 2px solid #fff; border-radius: 50%; pointer-events: none; z-index: 999; transition: transform 0.1s; }
     </style>
 </head>
 <body>
 
-    <div class="gradient-blob"></div>
+    <div class="mouse-cursor" id="cursor"></div>
 
-    <nav>
-        <div style="font-size: 24px; font-weight: 800;">WEBFLOW.</div>
-        <div class="nav-links">
-            <a href="#">Ana Səhifə</a>
-            <a href="#">Portfolio</a>
-            <a href="#">Xidmətlər</a>
-        </div>
-    </nav>
+    <div class="wrapper">
+        <section class="hero">
+            <h1>WEBFLOW<br>AGENCY.</h1>
+        </section>
 
-    <section class="hero">
-        <h1 data-aos="fade-up" data-aos-duration="1500">DIGITAL<br>IMPACT.</h1>
-        <p class="sub-hero" data-aos="fade-up" data-aos-delay="200">Biznesinizi rəqəmsal dünyada zirvəyə daşıyacaq, incə düşünülmüş həllər.</p>
-        <button style="padding: 20px 40px; background: #fff; border: none; border-radius: 50px; font-weight: 800; cursor: pointer;">Layihəyə Başlayaq</button>
-    </section>
+        <div class="grid">
+            <div class="card" data-tilt>
+                <h2>01. 3D Design</h2>
+                <p>İmmersiv və dərinlik hissi verən interfeyslər.</p>
+            </div>
+            <div class="card" data-tilt>
+                <h2>02. Development</h2>
+                <p>Müasir texnologiyalarla sürətli kodlaşdırma.</p>
+            </div>
+            <div class="card" data-tilt>
+                <h2>03. Brand Strategy</h2>
+                <p>Rəqəmsal dünyada unudulmaz imic.</p>
+            </div>
+        </div>
 
-    <div class="main-grid">
-        <div class="box span-12" data-aos="fade-up">
-            <h2>Bizim Missiyamız</h2>
-            <p>Sadəcə sayt yox, biznes proseslərinizi avtomatlaşdıran, sürətli və vizual cəhətdən heyranedici rəqəmsal məhsullar yaradırıq.</p>
-        </div>
-        <div class="box span-6" data-aos="fade-up" data-aos-delay="100">
-            <h3>Web Development</h3>
-            <p>Sıfırdan modern kodlaşdırma.</p>
-        </div>
-        <div class="box span-6" data-aos="fade-up" data-aos-delay="200">
-            <h3>UI/UX Dizayn</h3>
-            <p>İstifadəçilərinizi yormayan interfeyslər.</p>
-        </div>
+        <section class="contact">
+            <p style="margin-bottom: 20px; color: #666;">LAYİHƏNİZİ BİZİMLƏ HƏYATA KEÇİRİN</p>
+            <a href="mailto:samsgoog28@gmail.com" class="email">samsgoog28@gmail.com</a>
+            <div style="margin-top: 30px; font-size: 1.5rem;">Instagram: @webflow.0</div>
+        </section>
     </div>
 
-    <footer>
-        <div data-aos="fade-up">
-            <h3>Əlaqə</h3>
-            <p>samsgoog28@gmail.com</p>
-            <div class="social">@webflow.0</div>
-        </div>
-    </footer>
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init({ once: true, duration: 1000 });
+        // 3D Tilt Effect
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                card.style.transform = `perspective(1000px) rotateY(${x / 10}deg) rotateX(${-y / 10}deg) translateZ(10px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px)`;
+            });
+        });
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+        });
     </script>
 </body>
 </html>
