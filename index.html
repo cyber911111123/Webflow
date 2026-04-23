@@ -3,120 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webflow | Premium Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
+    <title>ULTIMATE STUDIO | Premium Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #050505;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
-            --accent: #6366f1;
+            --bg: #030303;
+            --card: #0a0a0a;
+            --text-main: #ffffff;
+            --text-dim: #71717a;
+            --accent: #ffffff;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        body {
-            background-color: var(--bg);
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        /* Floating Nav */
-        nav {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 600px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(20px);
-            padding: 15px 30px;
-            border-radius: 50px;
-            border: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-        }
-
-        .logo { font-weight: 900; letter-spacing: -1px; }
+        /* Container */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
         /* Hero */
-        .hero {
-            height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            padding: 0 20px;
+        .hero { padding: 150px 0 100px; }
+        .hero h1 { 
+            font-family: 'Syne', sans-serif; font-size: clamp(3rem, 12vw, 7rem);
+            line-height: 0.9; margin-bottom: 30px; letter-spacing: -3px;
         }
+        .hero p { font-size: 1.25rem; color: var(--text-dim); max-width: 500px; margin-bottom: 40px; }
 
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 7rem);
-            font-weight: 900; line-height: 0.9; margin-bottom: 20px;
-            background: linear-gradient(to right, #fff, #999);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.2rem; color: #888; max-width: 500px; margin-bottom: 30px;
-        }
-
-        /* Bento Grid */
-        .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px; padding: 0 5%; max-width: 1200px; margin: 0 auto;
-        }
-
+        /* Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; padding-bottom: 100px; }
+        
         .card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            padding: 40px; border-radius: 30px;
-            transition: 0.4s ease;
-            position: relative; overflow: hidden;
+            background: var(--card); border: 1px solid #1f1f1f;
+            padding: 40px; border-radius: 20px; position: relative; overflow: hidden;
+            transition: border 0.3s ease;
         }
 
-        .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-10px);
-            background: rgba(99, 102, 241, 0.05);
+        /* Spotlight Effect */
+        .card::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(400px circle at var(--x) var(--y), rgba(255,255,255,0.06), transparent 40%);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
         }
+        .card:hover::before { opacity: 1; }
+        .card:hover { border-color: #444; }
 
-        .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
-        .card p { color: #888; font-size: 0.95rem; }
+        .card h3 { font-family: 'Syne', sans-serif; font-size: 1.5rem; margin-bottom: 15px; }
+        .card p { color: var(--text-dim); line-height: 1.6; }
 
-        /* Footer */
-        footer { padding: 100px 5%; text-align: center; color: #444; font-size: 0.8rem; }
-
+        /* Button */
+        .btn { 
+            padding: 12px 25px; background: #fff; color: #000; border-radius: 8px;
+            text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+        .btn:hover { opacity: 0.8; }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">STUDIO.</div>
-        <div style="font-size: 0.8rem; opacity: 0.7;">BAKU / 2026</div>
-    </nav>
+    <div class="container">
+        <nav style="padding: 30px 0; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-weight: 800; letter-spacing: -1px;">EVOLUTION</div>
+            <a href="#" class="btn">Əlaqə</a>
+        </nav>
 
-    <section class="hero">
-        <h1 data-aos="fade-up">DIGITAL<br>EVOLUTION</h1>
-        <p data-aos="fade-up" data-aos-delay="200">Biznesinizi gələcəyə daşıyacaq rəqəmsal həllər.</p>
-        <div data-aos="fade-up" data-aos-delay="400" style="padding: 12px 30px; background: #fff; color: #000; border-radius: 50px; font-weight: bold; cursor: pointer;">Əlaqə saxla</div>
-    </section>
+        <section class="hero">
+            <h1>PREMIUM<br>DIGITAL ART.</h1>
+            <p>Biznesinizi rəqəmsal ekosistemdə zirvəyə daşıyacaq, incəliklə hazırlanmış həllər.</p>
+        </section>
 
-    <div class="grid">
-        <div class="card" data-aos="fade-up">
-            <h3>Web Development</h3>
-            <p>Performans və sürət mərkəzli kodlaşdırma.</p>
-        </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="100">
-            <h3>UI/UX Design</h3>
-            <p>İstifadəçi təcrübəsini zirvəyə daşıyan vizuallar.</p>
-        </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="200">
-            <h3>Brand Identity</h3>
-            <p>Bazarda unudulmaz bir imic yaradın.</p>
+        <div class="grid" id="grid">
+            <div class="card">
+                <h3>01. Engineering</h3>
+                <p>Sürətli, miqyaslana bilən və təhlükəsiz veb tətbiqlərin sıfırdan inkişafı.</p>
+            </div>
+            <div class="card">
+                <h3>02. Design</h3>
+                <p>Müştərilərinizin rəqəmsal təcrübəsini dəyişdirəcək modern interfeys dizaynları.</p>
+            </div>
+            <div class="card">
+                <h3>03. Strategy</h3>
+                <p>Brendinizi bazarda fərqləndirəcək strateji rəqəmsal transformasiya.</p>
+            </div>
         </div>
     </div>
 
-    <footer>
-        © 2026 ALL RIGHTS RESERVED
-    </footer>
+    <script>
+        // Spotlight Effect Logic
+        const grid = document.getElementById('grid');
+        const cards = document.querySelectorAll('.card');
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>AOS.init({ once: true });</script>
+        grid.addEventListener('mousemove', e => {
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+        });
+    </script>
 </body>
 </html>
