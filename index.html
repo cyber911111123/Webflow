@@ -3,105 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ULTIMATE STUDIO | Premium Digital</title>
+    <title>WebFlow | Corporate Digital Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #030303;
-            --card: #0a0a0a;
-            --text-main: #ffffff;
-            --text-dim: #71717a;
-            --accent: #ffffff;
+            --bg: #ffffff;
+            --text-main: #0a0a0a;
+            --text-dim: #525252;
+            --card-bg: #f8f8f8;
+            --accent: #000000;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.6; }
 
-        /* Container */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        /* Hero */
-        .hero { padding: 150px 0 100px; }
-        .hero h1 { 
-            font-family: 'Syne', sans-serif; font-size: clamp(3rem, 12vw, 7rem);
-            line-height: 0.9; margin-bottom: 30px; letter-spacing: -3px;
-        }
-        .hero p { font-size: 1.25rem; color: var(--text-dim); max-width: 500px; margin-bottom: 40px; }
+        /* Navbar */
+        nav { padding: 40px 0; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 28px; letter-spacing: -1px; text-transform: uppercase; }
 
-        /* Grid */
+        /* Hero */
+        .hero { padding: 120px 0 100px; }
+        .hero h1 { 
+            font-family: 'Syne', sans-serif; font-size: clamp(3rem, 10vw, 6rem);
+            line-height: 0.95; margin-bottom: 30px; letter-spacing: -2px;
+        }
+        .hero p { font-size: 1.25rem; color: var(--text-dim); max-width: 600px; margin-bottom: 40px; }
+
+        /* Business Grid */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; padding-bottom: 100px; }
         
         .card {
-            background: var(--card); border: 1px solid #1f1f1f;
-            padding: 40px; border-radius: 20px; position: relative; overflow: hidden;
-            transition: border 0.3s ease;
+            background: var(--card-bg); padding: 40px; border-radius: 16px;
+            transition: transform 0.3s ease; border: 1px solid #eee;
         }
+        .card:hover { transform: translateY(-5px); border-color: #ddd; }
+        .card h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; margin-bottom: 15px; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; }
 
-        /* Spotlight Effect */
-        .card::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(400px circle at var(--x) var(--y), rgba(255,255,255,0.06), transparent 40%);
-            opacity: 0; transition: opacity 0.3s; pointer-events: none;
-        }
-        .card:hover::before { opacity: 1; }
-        .card:hover { border-color: #444; }
-
-        .card h3 { font-family: 'Syne', sans-serif; font-size: 1.5rem; margin-bottom: 15px; }
-        .card p { color: var(--text-dim); line-height: 1.6; }
-
-        /* Button */
         .btn { 
-            padding: 12px 25px; background: #fff; color: #000; border-radius: 8px;
-            text-decoration: none; font-weight: 600; font-size: 0.9rem;
-            transition: opacity 0.3s;
+            padding: 14px 30px; background: var(--accent); color: #fff; border-radius: 8px;
+            text-decoration: none; font-weight: 600; display: inline-block;
         }
-        .btn:hover { opacity: 0.8; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <nav style="padding: 30px 0; display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-weight: 800; letter-spacing: -1px;">EVOLUTION</div>
-            <a href="#" class="btn">Əlaqə</a>
+        <nav>
+            <div class="logo">WebFlow</div>
+            <a href="#contact" style="color: #000; font-weight: 600; text-decoration: none;">Xidmətlər</a>
         </nav>
 
         <section class="hero">
-            <h1>PREMIUM<br>DIGITAL ART.</h1>
-            <p>Biznesinizi rəqəmsal ekosistemdə zirvəyə daşıyacaq, incəliklə hazırlanmış həllər.</p>
+            <h1>BİZNESİNİZİN<br>RƏQƏMSAL GƏLƏCƏYİ.</h1>
+            <p>Korporativ saytlar, SaaS platformalar və biznesinizi avtomatlaşdıran yüksək keyfiyyətli veb həllər.</p>
+            <a href="#" class="btn">Layihəyə Başlayaq</a>
         </section>
 
-        <div class="grid" id="grid">
+        <div class="grid">
             <div class="card">
-                <h3>01. Engineering</h3>
-                <p>Sürətli, miqyaslana bilən və təhlükəsiz veb tətbiqlərin sıfırdan inkişafı.</p>
+                <h3>01. Korporativ Saytlar</h3>
+                <p>Şirkətinizin imicini gücləndirən, peşəkar və etibarlı biznes platformaları.</p>
             </div>
             <div class="card">
-                <h3>02. Design</h3>
-                <p>Müştərilərinizin rəqəmsal təcrübəsini dəyişdirəcək modern interfeys dizaynları.</p>
+                <h3>02. SaaS Həllər</h3>
+                <p>Biznes proseslərinizi sürətləndirən, istifadəçi mərkəzli proqram təminatları.</p>
             </div>
             <div class="card">
-                <h3>03. Strategy</h3>
-                <p>Brendinizi bazarda fərqləndirəcək strateji rəqəmsal transformasiya.</p>
+                <h3>03. SEO & Optimizasiya</h3>
+                <p>Google axtarışlarında biznesinizin daha ön sıralarda olması üçün texniki dəstək.</p>
             </div>
         </div>
     </div>
 
-    <script>
-        // Spotlight Effect Logic
-        const grid = document.getElementById('grid');
-        const cards = document.querySelectorAll('.card');
-
-        grid.addEventListener('mousemove', e => {
-            cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                card.style.setProperty('--x', `${x}px`);
-                card.style.setProperty('--y', `${y}px`);
-            });
-        });
-    </script>
 </body>
 </html>
