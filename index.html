@@ -3,100 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebFlow | Digital Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
+    <title>WebFlow | Digital Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg: #0a0a0a;
-            --card-bg: #141414;
+            --bg: #050505;
             --text: #ffffff;
-            --text-muted: #a1a1aa;
+            --text-secondary: #888888;
             --accent: #ffffff;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.5; }
 
-        body { background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-        /* Navbar */
-        nav { padding: 40px 0; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+        /* Header */
+        header { padding: 40px 0; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -1px; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; margin-left: 30px; transition: 0.3s; }
+        .nav-links a:hover { color: #fff; }
 
         /* Hero */
-        .hero { padding: 120px 0; text-align: center; }
-        .hero h1 { font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1.1; margin-bottom: 24px; }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; }
-        
-        /* Bento Grid */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 100px;
+        .hero { padding: 140px 0; }
+        .hero h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(3rem, 10vw, 7rem); font-weight: 800; line-height: 1; letter-spacing: -3px; margin-bottom: 30px; }
+        .hero p { font-size: 20px; color: var(--text-secondary); max-width: 500px; margin-bottom: 50px; }
+
+        /* Services */
+        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 100px 0; border-top: 1px solid #1a1a1a; }
+        .service-item h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 24px; margin-bottom: 15px; }
+        .service-item p { color: var(--text-secondary); }
+
+        /* Contact */
+        .contact { padding: 100px 0; border-top: 1px solid #1a1a1a; }
+        .contact h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 40px; margin-bottom: 40px; }
+        .contact-info { display: flex; gap: 50px; }
+        .contact-info div h4 { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; margin-bottom: 10px; }
+        .contact-info div a { color: #fff; font-size: 24px; text-decoration: none; font-weight: 600; }
+
+        @media (max-width: 768px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .hero { padding: 80px 0; }
         }
-
-        .card {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 24px;
-            border: 1px solid #27272a;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .card:hover { transform: translateY(-10px); border-color: #52525b; }
-        .card h3 { font-size: 1.5rem; margin-bottom: 16px; }
-        .card p { color: var(--text-muted); }
-
-        /* Footer */
-        .footer { padding: 80px 0; border-top: 1px solid #27272a; text-align: center; }
-        .contact-info { margin-bottom: 30px; font-size: 1.2rem; }
-        .contact-info a { color: var(--text); text-decoration: none; font-weight: 600; border-bottom: 1px solid #52525b; }
-
     </style>
 </head>
 <body>
 
     <div class="container">
-        <nav>
-            <div class="logo">WEBFLOW.</div>
-        </nav>
+        <header>
+            <div class="logo">WEBFLOW</div>
+            <nav class="nav-links">
+                <a href="#services">Xidmətlər</a>
+                <a href="#contact">Əlaqə</a>
+            </nav>
+        </header>
 
         <section class="hero">
-            <h1 data-aos="fade-up">Rəqəmsal Dünyada <br>Gələcəyi Qururuq.</h1>
-            <p data-aos="fade-up" data-aos-delay="100">Biznesinizi avtomatlaşdıran, sürətli və premium dizaynlı veb platformalar.</p>
+            <h1>Premium Biznes Saytları.</h1>
+            <p>Biznesinizin rəqəmsal imicini mükəmməlləşdiririk. Sürətli, etibarlı və modern həllər.</p>
         </section>
 
-        <div class="bento-grid">
-            <div class="card" data-aos="fade-up" data-aos-delay="200">
-                <h3>01. Web Development</h3>
-                <p>Sürətli və miqyaslana bilən korporativ saytlar.</p>
+        <section class="services-grid" id="services">
+            <div class="service-item">
+                <h3>Korporativ Vebsaytlar</h3>
+                <p>Şirkətinizin ehtiyaclarına uyğun, tam optimallaşdırılmış veb platformalar.</p>
             </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="300">
-                <h3>02. UI/UX Design</h3>
-                <p>Müştərilərinizin bəyənəcəyi modern interfeyslər.</p>
+            <div class="service-item">
+                <h3>Modern UI/UX Dizayn</h3>
+                <p>İstifadəçi təcrübəsini ön planda tutan, estetik dizayn yanaşması.</p>
             </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="400">
-                <h3>03. SaaS Solutions</h3>
-                <p>Biznes prosesləri üçün xüsusi proqram təminatları.</p>
-            </div>
-        </div>
+        </section>
 
-        <section class="footer" data-aos="fade-up">
-            <h2>Əlaqə saxlayaq</h2>
+        <section class="contact" id="contact">
+            <h2>İş birliyinə başlayaq</h2>
             <div class="contact-info">
-                <p>E-poçt: <a href="mailto:samsgoog28@gmail.com">samsgoog28@gmail.com</a></p>
-                <p>Instagram: <a href="https://instagram.com/webflow.0" target="_blank">@webflow.0</a></p>
+                <div>
+                    <h4>E-poçt</h4>
+                    <a href="mailto:samsgoog28@gmail.com">samsgoog28@gmail.com</a>
+                </div>
+                <div>
+                    <h4>Instagram</h4>
+                    <a href="https://instagram.com/webflow.0" target="_blank">@webflow.0</a>
+                </div>
             </div>
         </section>
     </div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 1000, once: true });
-    </script>
 </body>
 </html>
