@@ -3,169 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webflow | Premium Digital Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <title>Webflow | Premium Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <style>
         :root {
-            --bg: #030303;
-            --accent: #3b82f6;
-            --text-main: #ffffff;
-            --text-dim: #94a3b8;
+            --bg: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
             --border: rgba(255, 255, 255, 0.1);
+            --accent: #6366f1;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
         body {
             background-color: var(--bg);
-            color: var(--text-main);
+            color: #fff;
             overflow-x: hidden;
-            line-height: 1.6;
-            /* Doku effekti */
-            background-image: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
         }
 
-        /* Grainy Texture Overlay */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
-            opacity: 0.15;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .bg-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; }
-        .blob {
-            position: absolute; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
-            filter: blur(100px); border-radius: 50%;
-            animation: move 15s infinite alternate ease-in-out;
-        }
-
-        @keyframes move {
-            from { transform: translate(-20%, -20%); }
-            to { transform: translate(60%, 40%); }
-        }
-
+        /* Floating Nav */
         nav {
-            padding: 30px 8%; display: flex; justify-content: space-between; align-items: center;
-            position: fixed; width: 100%; top: 0; z-index: 100;
-            backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 600px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
         }
 
-        .logo { font-weight: 800; font-size: 20px; letter-spacing: -1px; text-transform: uppercase; }
+        .logo { font-weight: 900; letter-spacing: -1px; }
 
+        /* Hero */
         .hero {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
-            padding: 0 5%;
+            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: clamp(50px, 12vw, 130px); font-weight: 800;
-            line-height: 0.9; letter-spacing: -6px; margin-bottom: 25px;
-            background: linear-gradient(180deg, #fff 0%, #777 100%);
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900; line-height: 0.9; margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #999);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            max-width: 600px; color: var(--text-dim); font-size: 1.2rem;
-            margin-bottom: 40px;
+            font-size: 1.2rem; color: #888; max-width: 500px; margin-bottom: 30px;
         }
 
-        .btn {
-            padding: 15px 35px; border-radius: 50px; text-decoration: none;
-            color: #fff; font-weight: 600; border: 1px solid var(--border);
-            transition: 0.3s; background: rgba(255,255,255,0.03);
+        /* Bento Grid */
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px; padding: 0 5%; max-width: 1200px; margin: 0 auto;
         }
-        .btn:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
 
-        .grid-container { padding: 100px 8%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        
-        .grid-item {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border);
-            border-radius: 24px; padding: 40px; backdrop-filter: blur(10px);
-            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 40px; border-radius: 30px;
+            transition: 0.4s ease;
+            position: relative; overflow: hidden;
         }
-        .grid-item:hover {
-            border-color: rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+            background: rgba(99, 102, 241, 0.05);
         }
-        .grid-item.large { grid-column: span 2; }
 
-        .grid-item h3 { font-size: 22px; margin-bottom: 15px; }
-        .grid-item p { color: var(--text-dim); font-size: 15px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .card p { color: #888; font-size: 0.95rem; }
 
-        .contact-wrap { padding: 100px 8%; text-align: center; }
-        .contact-card {
-            padding: 20px 40px; border-radius: 20px; text-decoration: none; color: #fff;
-            border: 1px solid var(--border); display: inline-block; margin: 10px;
-            transition: 0.3s;
-        }
-        .contact-card:hover { border-color: var(--accent); background: var(--accent); }
+        /* Footer */
+        footer { padding: 100px 5%; text-align: center; color: #444; font-size: 0.8rem; }
 
-        footer { padding: 50px 8%; text-align: center; color: var(--text-dim); font-size: 12px; }
-
-        @media (max-width: 768px) {
-            .grid-container { grid-template-columns: 1fr; }
-            .grid-item.large { grid-column: span 1; }
-        }
     </style>
 </head>
 <body>
 
-    <div class="bg-wrapper">
-        <div class="blob"></div>
-    </div>
-
     <nav>
-        <div class="logo">Webflow Studio</div>
-        <div style="font-size: 10px; letter-spacing: 2px; color: var(--text-dim);">EST. 2026</div>
+        <div class="logo">STUDIO.</div>
+        <div style="font-size: 0.8rem; opacity: 0.7;">BAKU / 2026</div>
     </nav>
 
     <section class="hero">
-        <h1 data-aos="zoom-out" data-aos-duration="1200">DIGITAL<br>EVOLUTION</h1>
-        <p data-aos="fade-up" data-aos-delay="200">Biznesiniz üçün sadəcə sayt yox, rəqəmsal ekosistem qururuq. Minimalizm və gücün harmoniyası.</p>
-        <a href="#contact" class="btn" data-aos="fade-up" data-aos-delay="400">Layihəyə Başlayaq</a>
+        <h1 data-aos="fade-up">DIGITAL<br>EVOLUTION</h1>
+        <p data-aos="fade-up" data-aos-delay="200">Biznesinizi gələcəyə daşıyacaq rəqəmsal həllər.</p>
+        <div data-aos="fade-up" data-aos-delay="400" style="padding: 12px 30px; background: #fff; color: #000; border-radius: 50px; font-weight: bold; cursor: pointer;">Əlaqə saxla</div>
     </section>
 
-    <section class="grid-container">
-        <div class="grid-item large" data-aos="fade-up">
+    <div class="grid">
+        <div class="card" data-aos="fade-up">
             <h3>Web Development</h3>
-            <p>Sürətli, təhlükəsiz və bütün cihazlara uyğun modern vebsaytların inkişafı.</p>
+            <p>Performans və sürət mərkəzli kodlaşdırma.</p>
         </div>
-        <div class="grid-item" data-aos="fade-up" data-aos-delay="100">
-            <h3>UI/UX Dizayn</h3>
-            <p>Müştəriləriniz üçün qüsursuz interfeys.</p>
+        <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <h3>UI/UX Design</h3>
+            <p>İstifadəçi təcrübəsini zirvəyə daşıyan vizuallar.</p>
         </div>
-        <div class="grid-item" data-aos="fade-up">
-            <h3>SEO</h3>
-            <p>Google-da tapılma ehtimalınızı artırın.</p>
+        <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <h3>Brand Identity</h3>
+            <p>Bazarda unudulmaz bir imic yaradın.</p>
         </div>
-        <div class="grid-item large" data-aos="fade-up" data-aos-delay="100">
-            <h3>Brendinq</h3>
-            <p>Sizin biznesin rəqəmsal dünyadakı vizual hekayəsini yaradırıq.</p>
-        </div>
-    </section>
-
-    <section class="contact-wrap" id="contact">
-        <h2 style="margin-bottom: 40px;">Əlaqə</h2>
-        <a href="#" class="contact-card">@webflow.0 (Instagram)</a>
-        <a href="mailto:samsgoog28@gmail.com" class="contact-card">samsgoog28@gmail.com</a>
-    </section>
+    </div>
 
     <footer>
-        © 2026 WEBFLOW STUDIO. ALL RIGHTS RESERVED.
+        © 2026 ALL RIGHTS RESERVED
     </footer>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 800, once: true });
-    </script>
+    <script>AOS.init({ once: true });</script>
 </body>
 </html>
