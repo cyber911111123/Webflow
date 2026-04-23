@@ -3,92 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebFlow | Digital Agency</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <title>WEBFLOW | Premium Digital Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         :root {
-            --bg: #050505;
-            --text: #ffffff;
-            --text-secondary: #888888;
-            --accent: #ffffff;
+            --bg: #030303;
+            --accent: #6366f1;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: #fff; overflow-x: hidden; }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+        /* Arxa fon hərəkətli blob */
+        .gradient-blob {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 70% 30%, #6366f1, transparent 40%),
+                        radial-gradient(circle at 20% 80%, #06b6d4, transparent 40%);
+            filter: blur(120px); opacity: 0.15; z-index: -1;
+            animation: blob-move 20s infinite alternate;
+        }
 
-        /* Header */
-        header { padding: 40px 0; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -1px; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; margin-left: 30px; transition: 0.3s; }
-        .nav-links a:hover { color: #fff; }
+        @keyframes blob-move { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
+
+        /* Nav */
+        nav { padding: 40px 8%; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links a { color: #fff; text-decoration: none; margin-left: 30px; font-weight: 400; opacity: 0.6; transition: 0.3s; }
+        .nav-links a:hover { opacity: 1; }
 
         /* Hero */
-        .hero { padding: 140px 0; }
-        .hero h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(3rem, 10vw, 7rem); font-weight: 800; line-height: 1; letter-spacing: -3px; margin-bottom: 30px; }
-        .hero p { font-size: 20px; color: var(--text-secondary); max-width: 500px; margin-bottom: 50px; }
+        .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; }
+        h1 { font-size: clamp(4rem, 15vw, 9rem); font-weight: 800; line-height: 0.9; letter-spacing: -5px; margin-bottom: 20px; }
+        .sub-hero { font-size: 1.5rem; color: #888; margin-bottom: 40px; }
 
-        /* Services */
-        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 100px 0; border-top: 1px solid #1a1a1a; }
-        .service-item h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 24px; margin-bottom: 15px; }
-        .service-item p { color: var(--text-secondary); }
+        /* Böyük Grid Sistemi */
+        .main-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; padding: 0 8%; }
+        .box { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 50px; border-radius: 40px; transition: 0.4s; }
+        .box:hover { background: rgba(255,255,255,0.06); transform: translateY(-10px); }
+        .span-6 { grid-column: span 6; }
+        .span-12 { grid-column: span 12; }
 
-        /* Contact */
-        .contact { padding: 100px 0; border-top: 1px solid #1a1a1a; }
-        .contact h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 40px; margin-bottom: 40px; }
-        .contact-info { display: flex; gap: 50px; }
-        .contact-info div h4 { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; margin-bottom: 10px; }
-        .contact-info div a { color: #fff; font-size: 24px; text-decoration: none; font-weight: 600; }
-
-        @media (max-width: 768px) {
-            .services-grid { grid-template-columns: 1fr; }
-            .hero { padding: 80px 0; }
-        }
+        /* Footer */
+        footer { padding: 100px 8%; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 100px; }
+        .social { font-size: 2rem; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <div class="logo">WEBFLOW</div>
-            <nav class="nav-links">
-                <a href="#services">Xidmətlər</a>
-                <a href="#contact">Əlaqə</a>
-            </nav>
-        </header>
+    <div class="gradient-blob"></div>
 
-        <section class="hero">
-            <h1>Premium Biznes Saytları.</h1>
-            <p>Biznesinizin rəqəmsal imicini mükəmməlləşdiririk. Sürətli, etibarlı və modern həllər.</p>
-        </section>
+    <nav>
+        <div style="font-size: 24px; font-weight: 800;">WEBFLOW.</div>
+        <div class="nav-links">
+            <a href="#">Ana Səhifə</a>
+            <a href="#">Portfolio</a>
+            <a href="#">Xidmətlər</a>
+        </div>
+    </nav>
 
-        <section class="services-grid" id="services">
-            <div class="service-item">
-                <h3>Korporativ Vebsaytlar</h3>
-                <p>Şirkətinizin ehtiyaclarına uyğun, tam optimallaşdırılmış veb platformalar.</p>
-            </div>
-            <div class="service-item">
-                <h3>Modern UI/UX Dizayn</h3>
-                <p>İstifadəçi təcrübəsini ön planda tutan, estetik dizayn yanaşması.</p>
-            </div>
-        </section>
+    <section class="hero">
+        <h1 data-aos="fade-up" data-aos-duration="1500">DIGITAL<br>IMPACT.</h1>
+        <p class="sub-hero" data-aos="fade-up" data-aos-delay="200">Biznesinizi rəqəmsal dünyada zirvəyə daşıyacaq, incə düşünülmüş həllər.</p>
+        <button style="padding: 20px 40px; background: #fff; border: none; border-radius: 50px; font-weight: 800; cursor: pointer;">Layihəyə Başlayaq</button>
+    </section>
 
-        <section class="contact" id="contact">
-            <h2>İş birliyinə başlayaq</h2>
-            <div class="contact-info">
-                <div>
-                    <h4>E-poçt</h4>
-                    <a href="mailto:samsgoog28@gmail.com">samsgoog28@gmail.com</a>
-                </div>
-                <div>
-                    <h4>Instagram</h4>
-                    <a href="https://instagram.com/webflow.0" target="_blank">@webflow.0</a>
-                </div>
-            </div>
-        </section>
+    <div class="main-grid">
+        <div class="box span-12" data-aos="fade-up">
+            <h2>Bizim Missiyamız</h2>
+            <p>Sadəcə sayt yox, biznes proseslərinizi avtomatlaşdıran, sürətli və vizual cəhətdən heyranedici rəqəmsal məhsullar yaradırıq.</p>
+        </div>
+        <div class="box span-6" data-aos="fade-up" data-aos-delay="100">
+            <h3>Web Development</h3>
+            <p>Sıfırdan modern kodlaşdırma.</p>
+        </div>
+        <div class="box span-6" data-aos="fade-up" data-aos-delay="200">
+            <h3>UI/UX Dizayn</h3>
+            <p>İstifadəçilərinizi yormayan interfeyslər.</p>
+        </div>
     </div>
 
+    <footer>
+        <div data-aos="fade-up">
+            <h3>Əlaqə</h3>
+            <p>samsgoog28@gmail.com</p>
+            <div class="social">@webflow.0</div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 1000 });
+    </script>
 </body>
 </html>
