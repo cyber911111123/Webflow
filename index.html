@@ -3,98 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEBFLOW | 3D Interactive Agency</title>
+    <title>Webflow Designs | Ultra Interactive Agency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #030303;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --accent: #ffffff;
+            --bg: #010208;
+            --primary: #0062ff;
+            --secondary: #00d2ff;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #ffffff;
+            --text-dim: #94a3b8;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); overflow: hidden; height: 100vh; }
 
-        .wrapper { perspective: 1000px; padding: 100px 5%; }
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; top: 0; left: 0; }
 
-        /* Hero Section */
-        .hero { text-align: center; margin-bottom: 150px; }
-        .hero h1 { font-size: clamp(4rem, 12vw, 10rem); font-weight: 800; text-transform: uppercase; letter-spacing: -5px; line-height: 0.9; }
-
-        /* 3D Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; transform-style: preserve-3d; }
-
-        /* 3D Card */
-        .card {
-            background: var(--card-bg);
-            padding: 60px; border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(20px);
-            transition: transform 0.1s ease-out, box-shadow 0.3s;
-            cursor: pointer;
-            transform-style: preserve-3d;
+        /* Navigation */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 10%; position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(1, 2, 8, 0.8); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
         }
-        .card:hover { box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .card h2 { font-size: 2.5rem; margin-bottom: 20px; transform: translateZ(20px); }
-        .card p { color: #aaa; transform: translateZ(10px); }
-
-        /* Contact Section */
-        .contact { text-align: center; margin-top: 200px; padding: 100px 0; border-top: 1px solid #222; }
-        .email { font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; color: #fff; text-decoration: none; }
+        .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        .logo:hover { transform: scale(1.05); }
+        .logo img { width: 42px; height: 42px; border-radius: 10px; box-shadow: 0 0 20px var(--primary); }
         
-        .mouse-cursor { position: fixed; width: 20px; height: 20px; border: 2px solid #fff; border-radius: 50%; pointer-events: none; z-index: 999; transition: transform 0.1s; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { 
+            text-decoration: none; color: var(--text-dim); font-size: 0.9rem; 
+            font-weight: 600; transition: 0.3s; cursor: pointer; position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; 
+            bottom: -5px; left: 0; background: var(--primary); transition: 0.3s;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+
+        /* Səhifə Quruluşu */
+        .page {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
+            display: none; flex-direction: column; justify-content: center;
+            align-items: center; padding: 80px 10% 20px; text-align: center;
+            opacity: 0; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.9) translateY(30px);
+        }
+        .page.active { display: flex; opacity: 1; transform: scale(1) translateY(0); }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
+        .gradient-text { background: linear-gradient(90deg, #fff, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Məzmun Blokları */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; max-width: 1200px; margin-top: 30px; }
+        .card { 
+            background: var(--glass); border: 1px solid var(--border); padding: 35px; 
+            border-radius: 28px; backdrop-filter: blur(15px); transition: 0.5s;
+            text-align: left; position: relative; overflow: hidden;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--primary); background: rgba(255,255,255,0.06); }
+        .card i { font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; }
+        .card h3 { margin-bottom: 12px; font-size: 1.4rem; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.5; }
+
+        /* İş Prosesi Siyahısı */
+        .process-list { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+        .step { background: var(--glass); padding: 20px 30px; border-radius: 100px; border: 1px solid var(--border); font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .step span { width: 30px; height: 30px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+
+        .btn {
+            margin-top: 30px; padding: 18px 45px; border-radius: 50px;
+            background: var(--primary); color: #fff; text-decoration: none;
+            font-weight: 700; transition: 0.4s; display: inline-block; cursor: pointer;
+            border: none; box-shadow: 0 10px 30px rgba(0, 98, 255, 0.3);
+        }
+        .btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 40px rgba(0, 98, 255, 0.5); }
+
     </style>
 </head>
 <body>
 
-    <div class="mouse-cursor" id="cursor"></div>
+    <div id="particles-js"></div>
 
-    <div class="wrapper">
-        <section class="hero">
-            <h1>WEBFLOW<br>AGENCY.</h1>
-        </section>
+    <nav>
+        <div class="logo" onclick="showPage('home')">
+            <img src="https://i.hizliresim.com/lr4ba27.png" alt="Logo">
+            <span>WEBFLOW <span style="color: var(--primary);">DESIGNS</span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a onclick="showPage('home')" id="link-home" class="active">Ana Səhifə</a></li>
+            <li><a onclick="showPage('about')" id="link-about">Haqqımızda</a></li>
+            <li><a onclick="showPage('services')" id="link-services">Xidmətlər</a></li>
+            <li><a onclick="showPage('process')" id="link-process">Proses</a></li>
+            <li><a onclick="showPage('contact')" id="link-contact">Əlaqə</a></li>
+        </ul>
+    </nav>
 
+    <!-- Ana Səhifə -->
+    <section id="home" class="page active">
+        <h1>Rəqəmsal İmperiyanızı <br><span class="gradient-text">Bizimlə Qurun</span></h1>
+        <p style="font-size: 1.2rem;">Webflow Designs — Yaradıcılıq və texnologiyanın kəsişdiyi nöqtə. Biz sadəcə sayt yox, biznesiniz üçün gəlir gətirən ekosistemlər yaradırıq.</p>
+        <div style="display: flex; gap: 20px;">
+            <a onclick="showPage('services')" class="btn">Xidmətlər</a>
+            <a onclick="showPage('contact')" class="btn" style="background: transparent; border: 1px solid var(--border);">Pulsuz Məsləhət</a>
+        </div>
+    </section>
+
+    <!-- Haqqımızda -->
+    <section id="about" class="page">
+        <h1 class="gradient-text">Niyə Məhz Biz?</h1>
         <div class="grid">
-            <div class="card" data-tilt>
-                <h2>01. 3D Design</h2>
-                <p>İmmersiv və dərinlik hissi verən interfeyslər.</p>
+            <div class="card">
+                <i class="fas fa-brain"></i>
+                <h3>Strateji Yanaşma</h3>
+                <p>Biz hər layihəyə biznes hədəflərinizi analiz edərək başlayırıq. Sizin uğurunuz bizim əsas göstəricimizdir.</p>
             </div>
-            <div class="card" data-tilt>
-                <h2>02. Development</h2>
-                <p>Müasir texnologiyalarla sürətli kodlaşdırma.</p>
+            <div class="card">
+                <i class="fas fa-bolt"></i>
+                <h3>Yüksək Sürət</h3>
+                <p>90+ Google PageSpeed balı ilə saytlarınızın ildırım sürətində açılmasına zəmanət veririk.</p>
             </div>
-            <div class="card" data-tilt>
-                <h2>03. Brand Strategy</h2>
-                <p>Rəqəmsal dünyada unudulmaz imic.</p>
+            <div class="card">
+                <i class="fas fa-fingerprint"></i>
+                <h3>Unikal Dizayn</h3>
+                <p>Hazır şablonlardan istifadə etmirik. Hər bir dizayn brendinizin ruhuna uyğun sıfırdan hazırlanır.</p>
             </div>
         </div>
+    </section>
 
-        <section class="contact">
-            <p style="margin-bottom: 20px; color: #666;">LAYİHƏNİZİ BİZİMLƏ HƏYATA KEÇİRİN</p>
-            <a href="mailto:samsgoog28@gmail.com" class="email">samsgoog28@gmail.com</a>
-            <div style="margin-top: 30px; font-size: 1.5rem;">Instagram: @webflow.0</div>
-        </section>
-    </div>
+    <!-- Xidmətlər -->
+    <section id="services" class="page">
+        <h1 class="gradient-text">Peşəkar Həllər</h1>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Full-Stack İnkişaf</h3>
+                <p>HTML5, CSS3, JavaScript (React/Vue) və mürəkkəb backend sistemləri ilə ən ağır yükü daşıyan saytlar.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-vial"></i>
+                <h3>Kiber Audit</h3>
+                <p>Saytınızın boşluqlarını tapırıq və kənar müdaxilələrdən 100% qorunma təmin edirik.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-chart-line"></i>
+                <h3>SEO & Marketinq</h3>
+                <p>Axtarış sistemlərində ilk pillələrə yüksəlmək üçün texniki və məzmun yönümlü optimizasiya.</p>
+            </div>
+        </div>
+    </section>
 
+    <!-- Proses -->
+    <section id="process" class="page">
+        <h1 class="gradient-text">İş Prosesimiz</h1>
+        <p>İdeyanızın reallığa çevrilmə yolu cəmi 4 addımdan ibarətdir:</p>
+        <div class="process-list">
+            <div class="step"><span>1</span> Analiz</div>
+            <div class="step"><span>2</span> Dizayn</div>
+            <div class="step"><span>3</span> Kodlaşdırma</div>
+            <div class="step"><span>4</span> Təhvil</div>
+        </div>
+        <p style="margin-top: 40px; font-style: italic;">"Şəffaflıq və keyfiyyət bizim iş prinsipimizdir."</p>
+    </section>
+
+    <!-- Əlaqə -->
+    <section id="contact" class="page">
+        <h1 class="gradient-text">Bizimlə Danışın</h1>
+        <p>Hər hansı bir sualınız var və ya yeni layihəyə başlamaq istəyirsiniz? <br> Komandamız sizə kömək etməyə hazırdır.</p>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="card" style="text-align: center;">
+                <i class="fab fa-instagram"></i>
+                <p>@webflow.0</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-envelope"></i>
+                <p>samsgoog28@gmail.com</p>
+            </div>
+        </div>
+        <a href="mailto:samsgoog28@gmail.com" class="btn">Layihəni Göndər</a>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // 3D Tilt Effect
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                card.style.transform = `perspective(1000px) rotateY(${x / 10}deg) rotateX(${-y / 10}deg) translateZ(10px)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px)`;
-            });
-        });
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
 
-        // Custom Cursor
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX - 10 + 'px';
-            cursor.style.top = e.clientY - 10 + 'px';
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => link.classList.remove('active'));
+
+            setTimeout(() => {
+                document.getElementById(pageId).classList.add('active');
+                document.getElementById('link-' + pageId).classList.add('active');
+            }, 50);
+        }
+
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 120, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#0062ff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.4 },
+                "size": { "value": 2 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#0062ff", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 1.8 }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
+                "modes": { "grab": { "distance": 200 } }
+            }
         });
     </script>
 </body>
